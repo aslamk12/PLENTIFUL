@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">plentiful</string>
+    <string name="register">New User? \n<u>Click to Register</u></string>
+    <string name="forget_password_email_entry">Enter your registered email id here</string>
+    <string name="submit">Submit</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_pass">Forgot Password?</string>
+
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="cart">My Cart</string>
+    <string name="categories">Categories</string>
+    <string name="orders">My Orders</string>
+    <string name="logout">Logout</string>
+    <string name="about">About Us</string>
 </resources>

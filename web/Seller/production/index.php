@@ -1,7 +1,8 @@
 <?php
 include "header.php";
 include "header_top.php";
-
+include "../../connection.php";
+$eml=$_SESSION['eml'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,51 +50,51 @@ background-image: none;">
                                         <option value="Craft and Decoration">Craft and Decoration</option>
                                     </select>
                                 </div></div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Product Name</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control" name="name">
-                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Product Name</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="text" class="form-control" name="name">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="file" class="form-control" name="image">
-                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="file" class="form-control" name="image">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                           <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Price</label>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="number" class="form-control" name="mobile">
+                                    <input type="number" class="form-control" name="price">
                                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Stock</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">stock</label>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="number" class="form-control" name="dob">
+                                    <input type="number" class="form-control" name="stock">
                                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Time for production</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="time" class="form-control" name="name">
+                                        <input type="time" class="form-control" name="ptime">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                     </div></div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Discrption</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Discription</label>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control" name="address">
+                                    <input type="text" class="form-control" name="discription">
                                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-3">
-                                    <button type="submit" class="btn btn-success" name="add">Submit</button>
+                                    <button type="submit" class="btn btn-success" name="upld">Submit</button>
                                 </div>
                             </div>
 
@@ -104,3 +105,47 @@ background-image: none;">
     </div>
     <!-- /top tiles -->
         </section></div></html>
+<?php
+if(isset($_POST['upld'])) {
+    $sq=mysqli_query($con,"select *from seller_registration  where email='$eml'");
+    while($rw=mysqli_fetch_array($sq))
+    {
+        $s_id=$rw['s_id'];
+    }
+    $cat = $_POST['category'];
+    $pname = $_POST['name'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $p_time = $_POST['ptime'];
+    $descp = $_POST['discription'];
+    $Image = $_FILES['image']['name'];
+    $images = explode('.', $Image);
+    $extensionImage = end($images);
+    $allowedExtsImage = array("jpeg", "jpg", "png");
+    $time = Time();
+    echo $stock;
+    $productImage = $time . '.' . $extensionImage;
+    //End Image Processing
+    if (in_array($extensionImage, $allowedExtsImage)) {
+        move_uploaded_file($_FILES['image']['tmp_name'], 'images/' . $productImage);
+        $ins ="insert into product(s_id,product_name,category,image,price,stock,time_for_production,discription)values('$s_id','$pname','$cat','$productImage','$price','$stock','$p_time','$descp')";
+        $res=mysqli_query($con,$ins);
+       // echo $ins;
+       if ($res) {
+           echo "<script>alert('SUCCESS')</script>";
+           echo "<script>window.location.href='index.php'</script>";
+        } else {
+            echo "<script>alert('FAILED')</script>";
+            echo "<script>window.location.href='index.php'</script>";
+        }
+
+    }
+    else
+    {
+        echo "<script>alert('Only jpg/ jpeg format allowed')</script>";
+        echo "<script>window.location.href='categories.php'</script>";
+    }
+}
+
+
+?>

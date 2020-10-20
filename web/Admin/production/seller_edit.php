@@ -10,11 +10,11 @@ $upt=mysqli_query($con,"update login set status='approved' where login_id='$l_id
 if($upt)
 {
     echo "<script>alert('Approved')</script>";
-    echo "<script>window.location.href='manage_employee.php'</script>";
+    echo "<script>window.location.href='manage_seller.php'</script>";
 }
 else
 {
     echo "<script>alert('FAILED')</script>";
-    echo "<script>window.location.href='manage_employee.php'</script>";
+    echo "<script>window.location.href='manage_seller.php'</script>";
 }
 ?>

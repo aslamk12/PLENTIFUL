@@ -1,4 +1,8 @@
-
+<?php
+include "../../connection.php";
+session_start();
+$eml=$_SESSION['eml'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

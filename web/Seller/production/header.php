@@ -1,4 +1,8 @@
-
+<?php
+include "../../connection.php";
+session_start();
+$eml=$_SESSION['eml'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +50,7 @@
                         <ul class="nav side-menu">
                             <li><a href="index.php"><i class="fa fa-home"></i>Upload Product</a></li>
 
-                            <li><a><i class="fa fa-edit"></i>Manage Product</a></li>
+                            <li><a href="view_product.php"><i class="fa fa-edit"></i>Manage Product</a></li>
 
                             <li><a><i class="fa fa-table"></i>View Orders</a></li>
                         </ul>

@@ -162,6 +162,7 @@ if(isset($_POST['reg'])) {
     $pass = $_POST['password'];
     $cpass = $_POST['conpassword'];
     $type='seller';
+    $status='pending';
     if (strlen($mobile)!= 10)
     {
         echo "<script>alert('Contact number must be 10')</script>";
@@ -180,11 +181,11 @@ if(isset($_POST['reg'])) {
     else
     {
         $ins = mysqli_query($con, "insert into seller_registration(name,email,mobile,dob,address,upi)VALUES ('$name','$email','$mobile','$dob','$address','$upi')");
-        $ins2 = mysqli_query($con, "insert into login(email,password,type)VALUES ('$email','$pass','$type')");
+        $ins2 = mysqli_query($con, "insert into login(email,password,type,status)VALUES ('$email','$pass','$type','$status')");
         if($ins2) {
             if ($ins) {
                 echo "<script>alert('Registered successfully, waiting for approval')</script>";
-                echo "<script>window.location.href='index.php'</script>";
+                echo "<script>window.location.href='../Admin/production/login.php'</script>";
             }
         }
 

@@ -194,13 +194,13 @@ public class MainActivity extends AppCompatActivity {
 
                         SharedPrefManager.getInstance(getApplicationContext()).buyerLogin(buyer);
 
-                        Intent verifyIntent = new Intent(getApplicationContext(), HomeActivty.class);
+                        Intent verifyIntent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(verifyIntent);
 
                     }
                    else
                     {
-                        Toast.makeText(getApplicationContext(), "Mobile number already registered.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "email already registered.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (JSONException e)

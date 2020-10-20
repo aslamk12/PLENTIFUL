@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,6 +62,11 @@
                     CREATE A SELLER ACCOUNT
                 </a>
             </div>
+            <div class="text-center">
+                <a href="../../Employee/production/employee_register.php" class="txt2 hov1">
+                    CREATE A EMPLOYEE ACCOUNT
+                </a>
+            </div>
         </form>
 
 
@@ -99,34 +106,39 @@ if(isset($_POST['login']))
         $count=mysqli_num_rows($usr);
         if ($count>0)
         {
-            while ($r = mysqli_fetch_array($usr))
-            {
+
+                $_SESSION['eml']=$email;
+                while ($r = mysqli_fetch_array($usr))
+              {
                 if ($r['type'] == 'admin')
                 {
-                    $aid = $r['id'];
-                    $_SESSION['admin'] = $aid;
-
 
                     echo "<script>alert('success')</script>";
                     echo "<script>window.location.href='index.php'</script>";
                 }
                 if ($r['type'] == 'seller')
                 {
-                    $sid = $r['id'];
-                    $_SESSION['seller'] = $sid;
-
-
+                    if ($r['status'] == 'approved')
+                    {
                     echo "<script>alert('success')</script>";
                     echo "<script>window.location.href='../../Seller/production/index.php'</script>";
+                    }
+                    else {
+                        echo "<script>alert('Not Approved')</script>";
+                        echo "<script>window.location.href='login.php'</script>";
+                    }
                 }
                 if ($r['type'] == 'employee')
                 {
-                    $eid = $r['id'];
-                    $_SESSION['employee'] = $eid;
-
-
-                    echo "<script>alert('success')</script>";
-                    echo "<script>window.location.href='../../Employee/production/index.php'</script>";
+                    if ($r['status'] == 'approved')
+                    {
+                        echo "<script>alert('success')</script>";
+                        echo "<script>window.location.href='../../Employee/production/index.php'</script>";
+                    }
+                    else {
+                        echo "<script>alert('Not Approved')</script>";
+                        echo "<script>window.location.href='login.php'</script>";
+                    }
                 }
             }
         }

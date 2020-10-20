@@ -1,7 +1,7 @@
 <?php
-//include "../../connection.php";
-//session_start();
-//$aid=$_SESSION['admin'];
+include "../../connection.php";
+session_start();
+$eml=$_SESSION['eml'];
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 
                             <li><a href="categories.php"><i class="fa fa-edit"></i>Categories</a></li>
 
-                            <li><a><i class="fa fa-edit"></i>Manage Sellers</a>
+                            <li><a href="manage_seller.php"><i class="fa fa-edit"></i>Manage Sellers</a>
                             </li>
 
                             <li><a href="manage_employee.php"><i class="fa fa-edit"></i>Manage Employee</a>
