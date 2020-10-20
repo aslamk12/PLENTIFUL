@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
                         SharedPrefManager.getInstance(getApplicationContext()).buyerLogin(buyer);
 
-                        Intent verifyIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent verifyIntent = new Intent(getApplicationContext(), LoginActivty.class);
                         startActivity(verifyIntent);
 
                     }
