@@ -111,6 +111,97 @@ if (isset($_GET['apicall']))
 
             }
             break;
+        case 'editprofile':
+
+            if (isTheseParametersAvailable(array('fullname','mobile','bid')))
+            {
+                $full_name = $_POST['fullname'];
+                $mobile = $_POST['mobile'];
+                $b_id=$_POST['bid'];
+
+
+                    $stmt = $conn->prepare("UPDATE  buyer_registration SET b_name = ?, mobile = ? WHERE b_id = ? ");
+                    $stmt->bind_param("sss",$full_name,$mobile,$b_id);
+
+
+                    if ($stmt->execute())
+                    {
+                        $stmt = $conn->prepare("SELECT b_id, b_name, mobile, email, dob from buyer_registration where email=?" );
+                        $stmt->bind_param("s",$email);
+                        $stmt->execute();
+                        $stmt->bind_result($b_id,$full_name, $mobile, $email,  $dob);
+                        $stmt->fetch();
+
+                        $user = array
+                        (
+                            'buyer_id'=>$b_id,
+                            'buyer_name'=>$full_name,
+                            'buyer_mobile'=>$mobile,
+                            'buyer_email'=>$email,
+                            'buyer_dob'=>$dob,
+                        );
+
+                        $stmt->close();
+
+                        $response['error']= false;
+                        $response['message'] = 'Profile Updated Successfully';
+                        $response['user'] = $user;
+                    }
+                }
+
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+
+            }
+            break;
+        case 'editpass':
+
+            if (isTheseParametersAvailable(array('password','email')))
+            {
+                $password = $_POST['password'];
+                $email = $_POST['email'];
+
+
+
+                $stmt = $conn->prepare("UPDATE  login SET password = ? WHERE email = ? ");
+                $stmt->bind_param("ss",$password,$email);
+
+
+                if ($stmt->execute())
+                {
+                    $stmt = $conn->prepare("SELECT b_id, b_name, mobile, email, dob from buyer_registration where email=?" );
+                    $stmt->bind_param("s",$email);
+                    $stmt->execute();
+                    $stmt->bind_result($b_id,$full_name, $mobile, $email,  $dob);
+                    $stmt->fetch();
+
+                    $user = array
+                    (
+                        'buyer_id'=>$b_id,
+                        'buyer_name'=>$full_name,
+                        'buyer_mobile'=>$mobile,
+                        'buyer_email'=>$email,
+                        'buyer_dob'=>$dob,
+                    );
+
+                    $stmt->close();
+
+                    $response['error']= false;
+                    $response['message'] = 'Password Changed Successfully';
+                    $response['user'] = $user;
+                }
+            }
+
+            else
+            {
+                $response['error'] = true;
+                $response['message'] = 'required parameters are not available';
+
+            }
+            break;
+
         default:
             $response['error'] = true;
             $response['message'] = 'Invalid operation Called';
