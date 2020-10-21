@@ -53,6 +53,7 @@ $eml=$_SESSION['eml'];
                             <li><a href="view_product.php"><i class="fa fa-edit"></i>Manage Product</a></li>
 
                             <li><a><i class="fa fa-table"></i>View Orders</a></li>
+                            <li><a href="edit_profile.php"><i class="fa fa-table"></i>Edit Profile</a></li>
                         </ul>
                     </div>
 

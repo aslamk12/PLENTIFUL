@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2020 at 12:14 PM
+-- Generation Time: Oct 21, 2020 at 08:25 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -41,10 +41,7 @@ CREATE TABLE `buyer_registration` (
 
 INSERT INTO `buyer_registration` (`b_id`, `b_name`, `mobile`, `email`, `dob`) VALUES
 (1, 'aslam', 9567105860, 'aslam@gmail.com', '1998-08-17'),
-(4, 'mhd aslam', 9567105861, 'aslamkedl@gmail.com', '2020-10-13'),
-(5, 'suhail', 9633058949, 'suhail@gmail.com', '2005-10-14'),
-(6, 'abcd', 9089789087, 'abcd@gmail.com', '2006-10-14'),
-(7, 'buyer1', 9807980798, 'buyer@gmail.com', '2000-01-01');
+(8, 'suhail a k', 7736918949, 'suhail@gmail.com', '1998-01-01');
 
 -- --------------------------------------------------------
 
@@ -112,12 +109,9 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`login_id`, `email`, `password`, `type`, `status`) VALUES
 (1, 'admin@gmail.com', 'admin123', 'admin', ''),
 (6, 'aslam@gmail.com', 'qwerty', 'buyer', ''),
-(9, 'aslamkedl@gmail.com', 'qwerty', 'buyer', ''),
-(10, 'suhail@gmail.com', 'qwerty', 'buyer', ''),
-(11, 'abcd@gmail.com', 'qwerty', 'buyer', ''),
-(14, 'buyer@gmail.com', 'qwerty', 'buyer', ''),
-(16, 'empd@gmail.com', 'empd123', 'employee', 'approved'),
-(17, 'sellerd@gmail.com', 'seller123', 'seller', 'approved');
+(16, 'empd@gmail.com', 'empd123', 'employee', 'disable'),
+(17, 'sellerd@gmail.com', 'seller123', 'seller', 'approved'),
+(18, 'suhail@gmail.com', 'suhail1234', 'buyer', 'approved');
 
 -- --------------------------------------------------------
 
@@ -165,7 +159,7 @@ CREATE TABLE `seller_registration` (
 --
 
 INSERT INTO `seller_registration` (`s_id`, `name`, `email`, `mobile`, `dob`, `address`, `upi`) VALUES
-(8, 'seller D', 'sellerd@gmail.com', 9865327410, '2020-01-01', 'Seller D Address', '9865327410@apl');
+(8, 'seller D', 'sellerd@gmail.com', 9865327410, '2020-01-01', 'Seller Home Address', '9865327410@apl');
 
 --
 -- Indexes for dumped tables
@@ -216,7 +210,7 @@ ALTER TABLE `seller_registration`
 -- AUTO_INCREMENT for table `buyer_registration`
 --
 ALTER TABLE `buyer_registration`
-  MODIFY `b_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `b_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -234,7 +228,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product`
