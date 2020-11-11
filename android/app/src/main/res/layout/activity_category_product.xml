@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CategoryActivity">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_cat"
+        android:id="@+id/rv_catproduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -14,7 +14,7 @@
 
 
     <ProgressBar
-        android:id="@+id/prog_bar_cat"
+        android:id="@+id/pb_catproduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>

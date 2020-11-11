@@ -26,37 +26,37 @@ import java.util.List;
 
 import android.os.Bundle;
 
-public class CategoryActivity extends AppCompatActivity {
-    List<Catlist> catlists;
+public class Category_product extends AppCompatActivity {
+    List<Cat_productlist> cat_productlists;
     RecyclerView recyclerView;
+    String cat_names;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
-        recyclerView = findViewById(R.id.recycler_view_cat);
+        setContentView(R.layout.activity_category_product);
+        recyclerView = findViewById(R.id.rv_catproduct);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cat_names=getIntent().getExtras().getString("category_name");
 
-        catlists = new ArrayList<>();
-        loadCategories();
+        cat_productlists = new ArrayList<>();
+        loadCat_products();
     }
-    private void loadCategories()
-    {
-        class LoadCategories extends AsyncTask<Void, Void, String>
-        {
-            ProgressBar progressBar = findViewById(R.id.prog_bar_cat);
+
+    private void loadCat_products() {
+        class LoadCat_products extends AsyncTask<Void, Void, String> {
+            ProgressBar progressBar = findViewById(R.id.pb_catproduct);
 
             @Override
-            protected String doInBackground(Void... voids)
-            {
+            protected String doInBackground(Void... voids) {
 
                 RequestHandler requestHandler = new RequestHandler();
 
-                HashMap<String, String> params  = new HashMap<>();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("category_name",cat_names);
 
-
-                return requestHandler.sendPostRequest(URLs.URL_CATEGORY_LIST, params);
+                return requestHandler.sendPostRequest(URLs.URL_CATPRODUCTLISTS, params);
             }
 
             @Override
@@ -69,34 +69,31 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                try
-                {
+                try {
                     JSONArray array = new JSONArray(s);
-                    for(int i=0; i < array.length(); i++)
-                    {
+                    for (int i = 0; i < array.length(); i++) {
 
                         JSONObject users = array.getJSONObject(i);
 
-                        catlists.add(new Catlist(
-                                users.getInt("cid"),
-                                users.getString("catname"),
-                                users.getString("catimage")
+                        cat_productlists.add(new Cat_productlist(
+                                users.getInt("pid"),
+                                users.getString("p_name"),
+                                users.getString("p_image"),
+                                users.getInt("price")
 
                         ));
                     }
 
 
-                    CatlistAdapter adapter = new CatlistAdapter(CategoryActivity.this, catlists);
+                    Cat_productlistAdapter adapter = new Cat_productlistAdapter(Category_product.this, cat_productlists);
                     recyclerView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
-                }
-                catch (JSONException e)
-                {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
-        LoadCategories lc = new LoadCategories();
+        LoadCat_products lc = new LoadCat_products();
         lc.execute();
     }
 }

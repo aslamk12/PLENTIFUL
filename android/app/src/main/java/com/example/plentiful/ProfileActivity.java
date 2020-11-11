@@ -24,7 +24,7 @@ import android.os.Bundle;
 
 public class ProfileActivity extends AppCompatActivity {
     int loggedIn_user;
-    String loggedIn_email;
+    String loggedIn_email,loggedIn_name,loggedIn_mobile;
     EditText edt_pfname,edt_pfmob,edt_pfpass, edt_pfcpass;
     Button btn_edt,btn_cpass;
     String name,mobile,password;
@@ -36,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
         Buyer buyer = SharedPrefManager.getInstance(this).getUser();
         loggedIn_user = buyer.getBid();
         loggedIn_email = buyer.getEmail();
+        loggedIn_name= buyer.getFull_name();
+        loggedIn_mobile = buyer.getMobile();
 
         edt_pfname = findViewById(R.id.et_pfname);
         edt_pfmob = findViewById(R.id.et_pfmobile);
@@ -43,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
         edt_pfcpass = findViewById(R.id.et_pfcpass);
         btn_edt = findViewById(R.id.btn_edit);
         btn_cpass = findViewById(R.id.btn_cpass);
+        edt_pfname.setText(loggedIn_name);
+        edt_pfmob.setText(loggedIn_mobile);
         btn_edt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     private void validatepf()
     {
         if(edt_pfname.getText().toString().isEmpty())

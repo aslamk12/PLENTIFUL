@@ -1,6 +1,5 @@
 <?php
 include "header.php";
-include "header.php";
 include "header_top.php";
 include "../../connection.php";
 $p_id=$_GET['id'];

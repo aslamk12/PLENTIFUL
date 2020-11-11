@@ -1,8 +1,5 @@
 <?php
-?>
-<?php
 include "../../connection.php";
-//$k=$_GET['sid'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,7 +168,7 @@ if(isset($_POST['reg'])) {
         if($lgn) {
             if ($cat) {
                 echo "<script>alert('Registered successfully, waiting for approval')</script>";
-                echo "<script>window.location.href='../Admin/production/login.php'</script>";
+                echo "<script>window.location.href='employee_register.php'</script>";
             }
         }
 

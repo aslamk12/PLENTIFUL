@@ -132,7 +132,8 @@ include "../../connection.php";
 
                                             <tbody>
                                             <?php
-                                            $sq1=mysqli_query($con,"select *from employee inner join login on employee.emp_email=login.email where login.status<>'pending'");
+                                            $sq1=mysqli_query($con,"select *from employee inner join login on employee.emp_email=login.email 
+                                                  where login.status<>'pending'");
                                             while($rw=mysqli_fetch_array($sq1))
                                             {
                                                 ?>
@@ -166,7 +167,6 @@ include "../../connection.php";
     </div>
 </div>
 </div>
-<!-- /form color picker -->
 
 </div>
 </div>

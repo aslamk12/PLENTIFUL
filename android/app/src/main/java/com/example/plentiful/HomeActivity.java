@@ -11,7 +11,7 @@ import android.os.Handler;
 import android.os.Bundle;
 
 public class HomeActivity extends AppCompatActivity {
-    TextView my_profile,category;
+    TextView my_profile,category,homep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         my_profile=(TextView)findViewById(R.id.tv_profile);
         category=(TextView)findViewById(R.id.tv_category);
+        homep=(TextView)findViewById(R.id.tv_home);
         my_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +34,15 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent regIntent = new Intent(HomeActivity.this,CategoryActivity.class);
+                startActivity(regIntent);
+
+            }
+        });
+        homep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent regIntent = new Intent(HomeActivity.this,Home1Activity.class);
                 startActivity(regIntent);
 
             }
