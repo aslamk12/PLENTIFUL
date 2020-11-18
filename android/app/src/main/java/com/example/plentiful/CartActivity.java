@@ -17,32 +17,34 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class Category_product extends AppCompatActivity {
-    List<Cat_productlist> cat_productlists;
+public class CartActivity extends AppCompatActivity {
+    List<Cartlist> cartlists;
     RecyclerView recyclerView;
-    String cat_names;
+    int cart_id,buyer_id,total=0;
+    TextView tv_total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_product);
-        recyclerView = findViewById(R.id.rv_catproduct);
+        setContentView(R.layout.activity_cart);
+
+        recyclerView = findViewById(R.id.rv_cart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cat_names=getIntent().getExtras().getString("category_name");
+        cart_id=getIntent().getExtras().getInt("cart_id");
+        buyer_id=getIntent().getExtras().getInt("buyer_id");
+        tv_total =findViewById(R.id.tv_total);
 
-        cat_productlists = new ArrayList<>();
-        loadCat_products();
+        cartlists = new ArrayList<>();
+        loadCart_products();
     }
-
-
-
-    private void loadCat_products() {
-        class LoadCat_products extends AsyncTask<Void, Void, String> {
-            ProgressBar progressBar = findViewById(R.id.pb_catproduct);
+    private void loadCart_products() {
+        class LoadCart_products extends AsyncTask<Void, Void, String> {
+            ProgressBar progressBar = findViewById(R.id.pb_cart);
 
             @Override
             protected String doInBackground(Void... voids) {
@@ -50,9 +52,11 @@ public class Category_product extends AppCompatActivity {
                 RequestHandler requestHandler = new RequestHandler();
 
                 HashMap<String, String> params = new HashMap<>();
-                params.put("category_name",cat_names);
+                //params.put("cart_id",String.valueOf(cart_id));
+                params.put("buyer_id",String.valueOf(buyer_id));
 
-                return requestHandler.sendPostRequest(URLs.URL_CATPRODUCTLISTS, params);
+
+                return requestHandler.sendPostRequest(URLs.URL_VIEW_CART, params);
             }
 
             @Override
@@ -71,17 +75,30 @@ public class Category_product extends AppCompatActivity {
 
                         JSONObject users = array.getJSONObject(i);
 
-                        cat_productlists.add(new Cat_productlist(
-                                users.getInt("pid"),
+                        cartlists.add(new Cartlist(
+                                //users.getInt("pid"),
+                                //users.getInt("bid"),
+                                users.getInt("price"),
+                                users.getInt("qty"),
+                                //users.getInt("total"),
                                 users.getString("p_name"),
-                                users.getString("p_image"),
-                                users.getInt("price")
+                                users.getString("p_image")
 
                         ));
                     }
 
+                    for (int j=0; j<array.length(); j++)
+                    {
+                        JSONObject users = array.getJSONObject(j);
+                        int price = users.getInt("price");
 
-                    Cat_productlistAdapter adapter = new Cat_productlistAdapter(Category_product.this, cat_productlists);
+                         total = total + price;
+                    }
+
+
+                    tv_total.setText("Rs : " + total);
+
+                    CartlistAdapter adapter = new CartlistAdapter(CartActivity.this, cartlists);
                     recyclerView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
@@ -89,7 +106,7 @@ public class Category_product extends AppCompatActivity {
                 }
             }
         }
-        LoadCat_products lc = new LoadCat_products();
+        LoadCart_products lc = new LoadCart_products();
         lc.execute();
     }
 }

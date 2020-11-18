@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Product_Details"></activity>
+        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".Product_Details" />
         <activity android:name=".Category_product" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".ProfileActivity" />
