@@ -2,20 +2,21 @@
 require_once 'DBconnect.php';
 
 $response = array();
-if (isTheseParametersAvailable(array('product_id','Buyer_id','price'))) {
+if (isTheseParametersAvailable(array('product_id','Buyer_id','price','qty'))) {
     $pro_id = $_POST['product_id'];
     $buy_id = $_POST['Buyer_id'];
     $pro_price=$_POST['price'];
-    $qty=1;
+    $qty=$_POST['qty'];
     $status="pending";
+    $total=$pro_price*$qty;
 
 
     $stmt = $conn->prepare("INSERT INTO cart (p_id,b_id,qty,total,status) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("sssss",$pro_id,$buy_id,$pro_price,$qty,$status);
+    $stmt->bind_param("sssss",$pro_id,$buy_id,$qty,$total,$status);
     if ($stmt->execute() )
     {
-        $stmt1 = $conn->prepare("SELECT LAST_INSERT_ID()" );
-        //$stmt1->bind_param("s",$buy_id);
+        $stmt1 = $conn->prepare("SELECT cart_id from cart where b_id=?" );
+        $stmt1->bind_param("s",$buy_id);
         $stmt1->execute();
         $stmt1->bind_result($cart_id);
 

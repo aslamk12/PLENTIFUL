@@ -1,11 +1,15 @@
 package com.example.plentiful;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import org.json.JSONArray;
@@ -14,33 +18,71 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class CartActivity extends AppCompatActivity {
     List<Cartlist> cartlists;
     RecyclerView recyclerView;
-    int cart_id,buyer_id,total=0;
+    int cart_id,buyer_id,total=0,oi_id;
     TextView tv_total;
+    Button cadrs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.cart_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profile_nav:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.category_nav:
+                        startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.cart_nav:
+                        return true;
+                }
+                return false;
+            }
+        });
+
         recyclerView = findViewById(R.id.rv_cart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cart_id=getIntent().getExtras().getInt("cart_id");
-        buyer_id=getIntent().getExtras().getInt("buyer_id");
+        Buyer buyer = SharedPrefManager.getInstance(this).getUser();
+        buyer_id = buyer.getBid();
         tv_total =findViewById(R.id.tv_total);
+        cadrs =findViewById(R.id.choose_address);
 
         cartlists = new ArrayList<>();
         loadCart_products();
+        cadrs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_order();
+
+            }
+        });
     }
     private void loadCart_products() {
         class LoadCart_products extends AsyncTask<Void, Void, String> {
@@ -52,7 +94,6 @@ public class CartActivity extends AppCompatActivity {
                 RequestHandler requestHandler = new RequestHandler();
 
                 HashMap<String, String> params = new HashMap<>();
-                //params.put("cart_id",String.valueOf(cart_id));
                 params.put("buyer_id",String.valueOf(buyer_id));
 
 
@@ -76,11 +117,9 @@ public class CartActivity extends AppCompatActivity {
                         JSONObject users = array.getJSONObject(i);
 
                         cartlists.add(new Cartlist(
-                                //users.getInt("pid"),
-                                //users.getInt("bid"),
                                 users.getInt("price"),
                                 users.getInt("qty"),
-                                //users.getInt("total"),
+                                users.getInt("total"),
                                 users.getString("p_name"),
                                 users.getString("p_image")
 
@@ -90,7 +129,7 @@ public class CartActivity extends AppCompatActivity {
                     for (int j=0; j<array.length(); j++)
                     {
                         JSONObject users = array.getJSONObject(j);
-                        int price = users.getInt("price");
+                        int price = users.getInt("total");
 
                          total = total + price;
                     }
@@ -108,5 +147,50 @@ public class CartActivity extends AppCompatActivity {
         }
         LoadCart_products lc = new LoadCart_products();
         lc.execute();
+    }
+    private void add_order()
+    {
+        class Add_order extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                RequestHandler requestHandler = new RequestHandler();
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put("buyer_id",String.valueOf(buyer_id));
+                params.put("total",String.valueOf(total));
+
+                return requestHandler.sendPostRequest(URLs.URL_ADD_ORDER, params);
+            }
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try
+                {
+                    JSONArray array = new JSONArray(s);
+                    for (int i = 0; i < array.length(); i++) {
+
+                        JSONObject users = array.getJSONObject(i);
+                        oi_id = users.getInt("oi_id");
+
+
+                        Intent orderIntent = new Intent(getApplicationContext(), ChooseAddress.class);
+                        orderIntent.putExtra("oi_id",oi_id);
+                        startActivity(orderIntent);
+
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        Add_order ao = new Add_order();
+        ao.execute();
     }
 }

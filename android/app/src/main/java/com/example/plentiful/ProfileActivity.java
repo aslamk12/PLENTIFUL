@@ -1,8 +1,10 @@
 package com.example.plentiful;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,8 @@ import java.util.HashMap;
 
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class ProfileActivity extends AppCompatActivity {
     int loggedIn_user;
     String loggedIn_email,loggedIn_name,loggedIn_mobile;
@@ -33,6 +37,35 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.profile_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profile_nav:
+                        return true;
+
+                    case R.id.category_nav:
+                        startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.cart_nav:
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         Buyer buyer = SharedPrefManager.getInstance(this).getUser();
         loggedIn_user = buyer.getBid();
         loggedIn_email = buyer.getEmail();

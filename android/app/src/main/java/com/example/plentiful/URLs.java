@@ -12,6 +12,10 @@ public class URLs {
     public static final String URL_PRODUCT_DETAILS = "http://192.168.42.146/plentiful/productdetails.php";
     public static final String URL_ADD_CART = "http://192.168.42.146/plentiful/addcart.php";
     public static final String URL_VIEW_CART = "http://192.168.42.146/plentiful/viewcart.php";
+    public static final String URL_ADD_ADRS = "http://192.168.42.146/plentiful/addadrs.php";
+    public static final String URL_ADD_ORDER = "http://192.168.42.146/plentiful/addorder.php";
+    public static final String URL_VIEW_ORDERLIST = "http://192.168.42.146/plentiful/view_orderlist.php";
+    public static final String URL_CONFIRM_ORDER = "http://192.168.42.146/plentiful/confirm_order.php";
 
 
 

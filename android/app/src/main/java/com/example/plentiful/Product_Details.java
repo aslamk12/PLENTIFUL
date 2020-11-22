@@ -1,10 +1,12 @@
 package com.example.plentiful;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,16 +24,47 @@ import java.util.HashMap;
 
 public class Product_Details extends AppCompatActivity {
     int product_id,price,stock,cart_id;
-    int loggedIn_user;
+    int loggedIn_user,qty=1;
     String pname,image,description,seller;
     ImageView iv_product;
-    TextView tv_pname,tv_price,tv_seller,tv_description;
-    Button bt_cart;
+    TextView tv_pname,tv_price,tv_seller,tv_description,tv_qty;
+    Button bt_cart,btn_dec,btn_inc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        //bottomNavigationView.setSelectedItemId(R.id.profile_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profile_nav:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.category_nav:
+                        startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.cart_nav:
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         Buyer buyer = SharedPrefManager.getInstance(this).getUser();
         loggedIn_user = buyer.getBid();
         product_id=getIntent().getExtras().getInt("product_id");
@@ -39,6 +73,22 @@ public class Product_Details extends AppCompatActivity {
         tv_seller=findViewById(R.id.product_seller);
         tv_description=findViewById(R.id.Description);
         iv_product=findViewById(R.id.product_image);
+        tv_qty=findViewById(R.id.tv_qty_value);
+        tv_qty.setText(String.valueOf(qty));
+        btn_dec=findViewById(R.id.decrementQuantity);
+        btn_dec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                decrement();
+            }
+        });
+        btn_inc=findViewById(R.id.incrementQuantity);
+        btn_inc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                increment();
+            }
+        });
         bt_cart=findViewById(R.id.cart);
 
         load_productdetails();
@@ -101,11 +151,30 @@ public class Product_Details extends AppCompatActivity {
         LoadProductDetails loadProductDetails = new LoadProductDetails();
         loadProductDetails.execute();
     }
+    void increment(){
+        if (qty < 5){
+            qty++;
+            tv_qty.setText(String.valueOf(qty));
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Limit of 5 products only",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    void decrement(){
+        if (qty > 1){
+            qty--;
+            tv_qty.setText(String.valueOf(qty));
+        }
+    }
 
     private void setdetails()
     {
         tv_pname.setText(pname);
-        tv_price.setText(String.valueOf(price));
+        tv_price.setText("RS."+price);
         tv_seller.setText(seller);
         tv_description.setText(description);
 
@@ -134,6 +203,8 @@ public class Product_Details extends AppCompatActivity {
                     params.put("product_id", String.valueOf(product_id));
                     params.put("Buyer_id", String.valueOf(loggedIn_user));
                     params.put("price", String.valueOf(price));
+                    params.put("qty", String.valueOf(qty));
+
 
 
 
@@ -150,6 +221,8 @@ public class Product_Details extends AppCompatActivity {
 
                             JSONObject users = array.getJSONObject(i);
                             cart_id = users.getInt("cart_id");
+
+                            Toast.makeText(getApplicationContext(), "product added to cart", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -163,14 +236,6 @@ public class Product_Details extends AppCompatActivity {
             Add_cart ac = new Add_cart();
             ac.execute();
         }
-        view_cart();
     }
 
-    private void view_cart()
-    {
-        Intent cartIntent = new Intent(Product_Details.this,CartActivity.class);
-        cartIntent.putExtra("buyer_id", loggedIn_user);
-        cartIntent.putExtra("cart_id", cart_id);
-        startActivity(cartIntent);
-    }
 }
