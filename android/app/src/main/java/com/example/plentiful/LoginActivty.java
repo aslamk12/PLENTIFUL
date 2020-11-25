@@ -37,6 +37,12 @@ public class LoginActivty extends AppCompatActivity {
         register=(TextView)findViewById(R.id.newUserRegistration);
 
 
+        if(SharedPrefManager.getInstance(this).isLoggedIn())
+        {
+            Intent homeIntent = new Intent(LoginActivty.this,HomeActivity.class);
+            startActivity(homeIntent);
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,7 +22,7 @@ public class ChooseAddress extends AppCompatActivity {
     EditText et_name, et_pincode,et_num, et_house, et_city, et_landmark;
     Button btn_add;
     String name,pin,mobile,house,city,landmark;
-    int order_id,oi_id,buyer_id;
+    int order_id,oi_id,buyer_id,cart_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class ChooseAddress extends AppCompatActivity {
         Buyer buyer = SharedPrefManager.getInstance(this).getUser();
         buyer_id = buyer.getBid();
         oi_id=getIntent().getExtras().getInt("oi_id");
+        cart_id=getIntent().getExtras().getInt("cart_id");
         et_name=findViewById(R.id.fullName);
         et_num=findViewById(R.id.phoneNumber);
         et_pincode=findViewById(R.id.pincode);
@@ -89,6 +90,7 @@ public class ChooseAddress extends AppCompatActivity {
                         Intent corderIntent = new Intent(getApplicationContext(), ConfirmOrder.class);
                         corderIntent.putExtra("oi_id",oi_id);
                         corderIntent.putExtra("order_id",order_id);
+                        corderIntent.putExtra("cart_id",cart_id);
                         startActivity(corderIntent);
 
 

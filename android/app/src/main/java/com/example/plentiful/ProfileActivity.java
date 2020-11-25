@@ -39,12 +39,15 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.profile_nav);
+        //bottomNavigationView.setSelectedItemId(R.id.profile_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+
                     case R.id.profile_nav:
+                        startActivity(new Intent(getApplicationContext(),ViewProfile.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                     case R.id.category_nav:
@@ -60,6 +63,10 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(),CartActivity.class));
                         overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.sign_out:
+                        SharedPrefManager.getInstance(getApplicationContext()).logout();
                         return true;
                 }
                 return false;

@@ -16,6 +16,9 @@ public class URLs {
     public static final String URL_ADD_ORDER = "http://192.168.42.146/plentiful/addorder.php";
     public static final String URL_VIEW_ORDERLIST = "http://192.168.42.146/plentiful/view_orderlist.php";
     public static final String URL_CONFIRM_ORDER = "http://192.168.42.146/plentiful/confirm_order.php";
+    public static final String URL_VIEW_HOME = "http://192.168.42.146/plentiful/viewhome.php";
+    public static final String URL_VIEW_MYORDER = "http://192.168.42.146/plentiful/viewmyorder.php";
+    public static final String URL_SEND_ORDER = "http://192.168.42.146/plentiful/sendorder.php";
 
 
 

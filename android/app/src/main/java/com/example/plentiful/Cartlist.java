@@ -15,7 +15,8 @@ public class Cartlist {
         this.p_image = p_image;
     }
 
-    public Cartlist( int price, int qty, int tot_p, String p_name, String p_image) {
+    public Cartlist( int cart_id,int price, int qty, int tot_p, String p_name, String p_image) {
+        this.cart_id = cart_id;
         this.price = price;
         this.qty = qty;
         this.tot_p = tot_p;

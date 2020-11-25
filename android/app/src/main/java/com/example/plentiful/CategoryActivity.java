@@ -48,7 +48,7 @@ public class CategoryActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profile_nav:
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        startActivity(new Intent(getApplicationContext(),ViewProfile.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -63,6 +63,10 @@ public class CategoryActivity extends AppCompatActivity {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(),CartActivity.class));
                         overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.sign_out:
+                        SharedPrefManager.getInstance(getApplicationContext()).logout();
                         return true;
                 }
                 return false;
