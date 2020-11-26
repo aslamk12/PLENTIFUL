@@ -2,21 +2,22 @@
 require_once 'DBconnect.php';
 
 $response = array();
-if (isTheseParametersAvailable(array('buyer_id','total'))) {
+if (isTheseParametersAvailable(array('buyer_id','total','cart_id'))) {
 
     $buyer_id=$_POST['buyer_id'];
     $total=$_POST['total'];
+    $cart_id=$_POST['cart_id'];
     $status="pending";
+    $pro_status="pending";
     $del_charge=40;
-    $cart_id=0;
     $del_time='2020-12-20';
 
-    $stmt = $conn->prepare("INSERT INTO order_item (b_id,cart_id,item_total,del_charge,del_time,status) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss",$buyer_id,$cart_id,$total,$del_charge,$del_time,$status);
+    $stmt = $conn->prepare("INSERT INTO order_item (b_id,cart_id,item_total,del_charge,del_time,status,production_status) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssssss",$buyer_id,$cart_id,$total,$del_charge,$del_time,$status,$pro_status);
     if ($stmt->execute() )
     {
-        $stmt1 = $conn->prepare("SELECT oi_id FROM order_item WHERE b_id=?" );
-        $stmt1->bind_param("s",$buyer_id);
+        $stmt1 = $conn->prepare("SELECT oi_id FROM order_item WHERE b_id=? and cart_id=?" );
+        $stmt1->bind_param("ss",$buyer_id,$cart_id);
         $stmt1->execute();
         $stmt1->bind_result($oi_id);
 

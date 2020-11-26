@@ -5,17 +5,19 @@ $response = array();
 if (isTheseParametersAvailable(array('buyer_id'))) {
     //$cart_id = $_POST['cart_id'];
     $buyer_id = $_POST['buyer_id'];
+    $status=0;
 
-    $stmt = $conn->prepare("SELECT qty,total,product_name,image,price FROM cart inner join product on cart.p_id=product.p_id where b_id=?");
-    $stmt->bind_param("s",$buyer_id);
+    $stmt = $conn->prepare("SELECT cart_id,qty,total,product_name,image,price FROM cart inner join product on cart.p_id=product.p_id where b_id=? and cart.status=?");
+    $stmt->bind_param("ss",$buyer_id,$status);
     $stmt->execute();
     //$tot = 0;
-    $stmt->bind_result( $qty,$tot_p,$pname,$image,$price,);
+    $stmt->bind_result( $cart_id,$qty,$tot_p,$pname,$image,$price);
     $cart_details = array();
     while ($stmt->fetch()) {
         $temp = array();
-        //$temp['pid'] = $pid;
-        //$temp['bid'] = $bid;
+        //$temp['pid'] = $p_id;
+        $temp['cart_id'] = $cart_id;
+        
         $temp['price'] = $price;
         $temp['qty'] = $qty;
         $temp['total'] = $tot_p;

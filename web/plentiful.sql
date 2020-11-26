@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2020 at 05:58 PM
+-- Generation Time: Nov 25, 2020 at 09:10 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `buyer_registration` (
 
 INSERT INTO `buyer_registration` (`b_id`, `b_name`, `mobile`, `email`, `dob`) VALUES
 (1, 'aslam', 9567105860, 'aslam@gmail.com', '1998-08-17'),
-(8, 'suhail A K', 9633058949, 'suhail@gmail.com', '1998-01-01'),
+(8, 'suhail a k', 9633058949, 'suhail@gmail.com', '1998-01-01'),
 (9, 'yuno', 9876543210, 'yuno@gmail.com', '1998-10-01');
 
 -- --------------------------------------------------------
@@ -61,11 +61,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`c_id`, `category_name`, `image`) VALUES
-(5, 'Gents Fashion', '1601453513.jpeg'),
-(6, 'Toys', '1602618408.jpg'),
-(7, 'Cake', '1602665185.jpg'),
-(8, 'Ladies Fashion', '1603262759.jpeg'),
-(13, 'Craft and Decoration', '1604505250.jpg');
+(15, 'Gents Fashion', '1606116668.jpeg'),
+(16, 'Ladies Fashion', '1606116721.jpg'),
+(17, 'Cake', '1606116772.jpg'),
+(18, 'Toys', '1606116824.jpeg'),
+(19, 'Craft and Decoration', '1606116888.jpg');
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,8 @@ INSERT INTO `employee` (`e_id`, `emp_name`, `emp_email`, `emp_mobile`, `emp_dob`
 (10, 'emp del', 'empd@gmail.com', 9874562130, '2020-01-01', 'empd address'),
 (11, 'Ram', 'ram@gmail.com', 7894561230, '1998-01-01', 'Ram House'),
 (12, 'Eren', 'eren@gmail.com', 9685743021, '1999-01-01', 'eren villa'),
-(13, 'usopp', 'usopp@gmail.com', 6549873210, '2005-01-01', 'grand line');
+(13, 'usopp', 'usopp@gmail.com', 6549873210, '2005-01-01', 'grand line'),
+(14, 'asta', 'asta@gmail.com', 9567105860, '1998-01-01', 'grand line');
 
 -- --------------------------------------------------------
 
@@ -112,18 +113,15 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`login_id`, `email`, `password`, `type`, `status`) VALUES
 (1, 'admin@gmail.com', 'admin123', 'admin', ''),
-(6, 'aslam@gmail.com', 'qwerty', 'buyer', ''),
-(16, 'empd@gmail.com', 'empd123', 'employee', 'disable'),
 (17, 'sellerd@gmail.com', 'seller123', 'seller', 'approved'),
 (18, 'suhail@gmail.com', 'suhail1234', 'buyer', 'approved'),
-(19, 'ram@gmail.com', 'ram123', 'employee', 'disable'),
-(20, 'eren@gmail.com', 'eren123', 'employee', 'approved'),
-(21, 'naruto@gmail.com', 'naruto123', 'seller', 'pending'),
-(22, 'luffy@gmail.com', 'luffy123', 'seller', 'approved'),
+(20, 'eren@gmail.com', 'eren123', 'employee', 'disable'),
+(21, 'naruto@gmail.com', 'naruto123', 'seller', 'approved'),
 (23, 'yuno@gmail.com', 'qwerty', 'buyer', 'approved'),
 (24, 'zoro@gmail.com', 'zoro123', 'seller', 'pending'),
 (25, 'nami@gmail.com', 'nami123', 'seller', 'pending'),
-(26, 'usopp@gmail.com', 'usopp123', 'employee', 'pending');
+(26, 'usopp@gmail.com', 'usopp123', 'employee', 'approved'),
+(27, 'asta@gmail.com', 'asta123', 'employee', 'approved');
 
 -- --------------------------------------------------------
 
@@ -148,9 +146,11 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`p_id`, `s_id`, `product_name`, `category`, `image`, `price`, `stock`, `time_for_production`, `discription`) VALUES
-(6, 8, 'shirt', 'Gents Fashion', '1603188231.jpg', 150, 5, '01:30:00', 'good product'),
-(7, 8, 'sari', 'Ladies Fashion', '1603262924.jpeg', 550, 10, '15:00:00', 'good product'),
-(8, 8, 'Black forest', 'Cake', '1603269015.jpg', 200, 5, '01:30:00', 'good product');
+(10, 8, 'churidar', 'Ladies fashion', '1606118700.jpg', 100, 2, '01:30:00', 'good product'),
+(11, 8, 'black forest', 'Cake', '1606118731.jpg', 300, 5, '01:30:00', 'good product'),
+(12, 8, 'dolls', 'Toys', '1606118763.jpeg', 500, 7, '01:30:00', 'good product'),
+(13, 8, 't shirt', 'Gents fashion', '1606118809.jpeg', 200, 30, '01:30:00', 'good product'),
+(14, 8, 'shirt', 'Gents fashion', '1606120426.jpeg', 250, 3, '02:30:00', 'good product');
 
 -- --------------------------------------------------------
 
@@ -173,11 +173,8 @@ CREATE TABLE `seller_registration` (
 --
 
 INSERT INTO `seller_registration` (`s_id`, `name`, `email`, `mobile`, `dob`, `address`, `upi`) VALUES
-(8, 'seller demo', 'sellerd@gmail.com', 9865327410, '2020-01-01', 'Seller Home', '9865327410@apl'),
-(9, 'Naruto', 'naruto@gmail.com', 8978897889, '2000-01-01', 'Leaf village', '8978897889@apl'),
-(10, 'luffy', 'luffy@gmail.com', 7878787878, '2001-01-01', 'grand line', '7878787878@apl'),
-(11, 'zoro', 'zoro@gmail.com', 9865327410, '1999-01-01', 'grand line', '9865327410@apl'),
-(12, 'nami', 'nami@gmail.com', 7894105263, '2000-01-01', 'grand line', '7894105263@apl');
+(8, 'seller Ram', 'sellerd@gmail.com', 9865327410, '2020-01-01', 'Ram villa', '9865327410@apl'),
+(9, 'Naruto', 'naruto@gmail.com', 8978897889, '2000-01-01', 'Leaf village', '8978897889@apl');
 
 --
 -- Indexes for dumped tables
@@ -234,25 +231,25 @@ ALTER TABLE `buyer_registration`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `e_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `e_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `p_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `seller_registration`

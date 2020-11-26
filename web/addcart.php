@@ -7,7 +7,7 @@ if (isTheseParametersAvailable(array('product_id','Buyer_id','price','qty'))) {
     $buy_id = $_POST['Buyer_id'];
     $pro_price=$_POST['price'];
     $qty=$_POST['qty'];
-    $status="pending";
+    $status=0;
     $total=$pro_price*$qty;
 
 
@@ -15,8 +15,8 @@ if (isTheseParametersAvailable(array('product_id','Buyer_id','price','qty'))) {
     $stmt->bind_param("sssss",$pro_id,$buy_id,$qty,$total,$status);
     if ($stmt->execute() )
     {
-        $stmt1 = $conn->prepare("SELECT cart_id from cart where b_id=?" );
-        $stmt1->bind_param("s",$buy_id);
+        $stmt1 = $conn->prepare("SELECT cart_id from cart where b_id=? and status=?" );
+        $stmt1->bind_param("ss",$buy_id,$status);
         $stmt1->execute();
         $stmt1->bind_result($cart_id);
 

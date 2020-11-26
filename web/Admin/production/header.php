@@ -63,17 +63,19 @@ $eml=$_SESSION['eml'];
                             <li><a href="manage_employee.php"><i class="fa fa-edit"></i>Manage Employee</a>
                             </li>
 
-                            <li><a><i class="fa fa-table"></i>Manage Delivery</a></li>
+                            <li><a href="manage_delivery.php"><i class="fa fa-table"></i>Manage Delivery</a></li>
 
 
-                            <li><a><i class="fa fa-edit"></i>Order Status</a>
+                            <li><a href="order_status.php"><i class="fa fa-edit"></i>Order Status</a>
                             </li>
 
-                            <li><a><i class="fa fa-table"></i> Manage Payment</a>
+                            <li><a href="manage_payment.php"><i class="fa fa-table"></i> Manage Payment</a>
                             </li>
 
 
-                            <li><a><i class="fa fa-desktop"></i> Sales Report</a>
+                            <li><a href="sales_report.php"><i class="fa fa-desktop"></i> Sales Report</a>
+                            </li>
+                            <li><a href="logout.php"><i class="fa fa-desktop"></i> Log out</a>
                             </li>
 
                            </ul>
