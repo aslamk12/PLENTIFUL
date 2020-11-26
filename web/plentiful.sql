@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2020 at 08:38 PM
+-- Generation Time: Nov 26, 2020 at 09:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -103,11 +103,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`c_id`, `category_name`, `image`) VALUES
-(15, 'Gents Fashion', '1606116668.jpeg'),
-(16, 'Ladies Fashion', '1606116721.jpg'),
-(17, 'Cake', '1606116772.jpg'),
-(18, 'Toys', '1606116824.jpeg'),
-(19, 'Craft and Decoration', '1606116888.jpg');
+(19, 'Craft and Decoration', '1606116888.jpg'),
+(21, 'Gents Fashion', '1606421425.jpg'),
+(22, 'Ladies Fashion', '1606421499.png'),
+(23, 'Toys', '1606421555.png'),
+(24, 'Foods', '1606421621.jpg'),
+(25, 'Cake ', '1606421675.png');
 
 -- --------------------------------------------------------
 
@@ -461,7 +462,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `delivery`
