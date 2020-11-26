@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2020 at 06:22 AM
+-- Generation Time: Nov 26, 2020 at 08:15 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -121,7 +121,8 @@ INSERT INTO `login` (`login_id`, `email`, `password`, `type`, `status`) VALUES
 (24, 'zoro@gmail.com', 'zoro123', 'seller', 'pending'),
 (25, 'nami@gmail.com', 'nami123', 'seller', 'pending'),
 (26, 'usopp@gmail.com', 'usopp123', 'employee', 'approved'),
-(27, 'asta@gmail.com', 'asta123', 'employee', 'approved');
+(27, 'asta@gmail.com', 'asta123', 'employee', 'approved'),
+(28, 'jhon@gmail.com', 'jhon123', 'seller', 'pending');
 
 -- --------------------------------------------------------
 
@@ -150,7 +151,8 @@ INSERT INTO `product` (`p_id`, `s_id`, `product_name`, `category`, `image`, `pri
 (11, 8, 'black forest', 'Cake', '1606118731.jpg', 300, 5, '01:30:00', 'good product'),
 (12, 8, 'dolls', 'Toys', '1606118763.jpeg', 500, 7, '01:30:00', 'good product'),
 (13, 8, 't shirt', 'Gents fashion', '1606118809.jpeg', 200, 30, '01:30:00', 'good product'),
-(14, 8, 'shirt', 'Gents fashion', '1606120426.jpeg', 250, 3, '02:30:00', 'good product');
+(14, 8, 'shirt', 'Gents fashion', '1606120426.jpeg', 250, 3, '02:30:00', 'good product'),
+(15, 9, 'Blue Shirt', 'Gents fashion', '1606372103.jpg', 250, 5, '01:30:00', 'Blue shirt,good material,100% cotton');
 
 -- --------------------------------------------------------
 
@@ -174,7 +176,8 @@ CREATE TABLE `seller_registration` (
 
 INSERT INTO `seller_registration` (`s_id`, `name`, `email`, `mobile`, `dob`, `address`, `upi`) VALUES
 (8, 'seller Ram', 'sellerd@gmail.com', 9865327410, '2020-01-01', 'Ram villa', '9865327410@apl'),
-(9, 'Naruto', 'naruto@gmail.com', 8978897889, '2000-01-01', 'Leaf village', '8978897889@apl');
+(9, 'Naruto', 'naruto@gmail.com', 8978897889, '2000-01-01', 'Leaf village', '8978897889@apl'),
+(13, 'jhon', 'jhon@gmail.com', 9876543210, '1998-07-18', 'jhonvilla', '9876543210@apl');
 
 --
 -- Indexes for dumped tables
@@ -243,19 +246,19 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `login_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `p_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `seller_registration`
 --
 ALTER TABLE `seller_registration`
-  MODIFY `s_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `s_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

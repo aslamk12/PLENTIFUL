@@ -152,7 +152,6 @@ public class CartActivity extends AppCompatActivity {
                     tv_total.setText("Rs : " + total);
 
                     CartlistAdapter adapter = new CartlistAdapter(CartActivity.this, cartlists);
-                    Toast.makeText(CartActivity.this, String.valueOf(a_cart_id), Toast.LENGTH_SHORT).show();;
                     recyclerView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {

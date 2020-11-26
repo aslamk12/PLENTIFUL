@@ -68,7 +68,7 @@ while($rw=mysqli_fetch_array($sq))
                                                     $b_id = $rw5['b_id'];
                                                     $qty = $rw5['qty'];
                                                     $total = $rw5['total'];
-                                                }
+
                                                 $sq7 = mysqli_query($con, "select o_id,buy_name,city,sl_id,status from del_address inner join seller_orders on del_address.oi_id=seller_orders.oi_id where del_address.b_id='$b_id'");
                                                 while ($rw7 = mysqli_fetch_array($sq7)) {
                                                     $o_id = $rw7['o_id'];
@@ -94,7 +94,7 @@ while($rw=mysqli_fetch_array($sq))
 
                                                 </tr>
 
-                                               <?php } ?>
+                                               <?php }} ?>
 
                                             </tbody>
                                         </table>
@@ -158,7 +158,7 @@ while($rw=mysqli_fetch_array($sq))
                                                 $pname = $rw5['product_name'];
                                                 $b_id = $rw5['b_id'];
                                                 $qty = $rw5['qty'];
-                                            }
+
                                             $sq7 = mysqli_query($con, "select o_id,buy_name,city,sl_id,status from del_address inner join seller_orders on del_address.oi_id=seller_orders.oi_id where del_address.b_id='$b_id'");
                                             while ($rw7 = mysqli_fetch_array($sq7)) {
                                                 $o_id = $rw7['o_id'];
@@ -179,7 +179,7 @@ while($rw=mysqli_fetch_array($sq))
 <!--                                                    <td><a href="employee_disable.php?id=--><?php //echo $rw['emp_email'] ?><!--">Disable</a>-->
 
                                                     </td>
-                                                    <?php }?>
+                                                    <?php }}?>
 
                                                 </tr>
 
