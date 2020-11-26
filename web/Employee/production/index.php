@@ -104,8 +104,8 @@ while($rw=mysqli_fetch_array($sq))
                                                         <td><?php echo $b_mobile; ?></td>
                                                         <td><?php echo $total ?></td>
 
-                                                        <td><a href="complete_delivery.php?id=<?php echo $d_id ?>">completed </a>||
-                                                            <a href="canceled_delivery.php?id=<?php echo $d_id ?>">canceled</a>
+                                                        <td><a href="complete_delivery.php?id=<?php echo $emp_id ?>">completed </a>||
+                                                            <a href="canceled_delivery.php?id=<?php echo $emp_id ?>">canceled</a>
                                                         </td>
 
                                                     </tr>

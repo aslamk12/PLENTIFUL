@@ -21,7 +21,7 @@ $eml=$_SESSION['eml'];
                 <div class="col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>VIEW PENDING DELIVERY</h2>
+                            <h2>VIEW DELIVERY STATUS</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -46,11 +46,8 @@ $eml=$_SESSION['eml'];
                                                 <th class="column-title">Buyer Name</th>
                                                 <th class="column-title">Buyer Loaction</th>
                                                 <th class="column-title">Employee Name</th>
-                                                <th class="column-title">Qty</th>
-                                                <th class="column-title">Status</th>
                                                 <th class="column-title">Total Amount</th>
-                                                <th class="column-title no-link last"><span class="nobr">Action</span>
-                                                </th>
+                                                <th class="column-title">Status</th>
                                                 <th class="bulk-actions" colspan="7">
                                                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                                 </th>
@@ -59,21 +56,43 @@ $eml=$_SESSION['eml'];
 
                                             <tbody>
                                             <?php
+                                            $sq1=mysqli_query($con,"select *from delivery inner join assigned_delivery on delivery.d_id=assigned_delivery.d_id where delivery.sts='assigned' or delivery.sts='completed'");
+                                            while ($rw5 = mysqli_fetch_array($sq1)) {
+                                                $d_id = $rw5['d_id'];
+                                                $product_name = $rw5['product_name'];
+                                                $s_id = $rw5['s_id'];
+                                                $o_id = $rw5['o_id'];
+                                                $total = $rw5['total'];
+                                                $sts = $rw5['sts'];
+                                                $emp_id= $rw5['emp_id'];
+//                                            }
+                                                $sq2=mysqli_query($con,"select  * from employee where e_id='$emp_id'");
+                                                while ($rw6 = mysqli_fetch_array($sq2)) {
+                                                    $ename = $rw6['emp_name'];
 
+                                                }
+                                                $sq3=mysqli_query($con,"select  * from del_address where o_id='$o_id'");
+                                                while ($rw7 = mysqli_fetch_array($sq3)) {
+                                                    $b_name = $rw7['buy_name'];
+                                                    $b_mobile = $rw7['mobile'];
+                                                    $b_address = $rw7['address'];
+                                                    $b_city = $rw7['city'];
+                                                }
+                                                if(($sts=='assigned') || ($sts=='completed'))
+                                                {
 
-                                                ?>
-                                                <tr class="odd pointer">
-                                                    <td><?php echo 'abc'  ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><?php echo 'abc' ?></td>
-                                                    <td><a href="order_edit.php?id=<?php echo '$sl_id' ?>">Approve</a>
-                                                    </td>
+                                                    ?>
+                                                    <tr class="odd pointer">
+                                                        <td><?php echo $product_name; ?></td>
+                                                        <td><?php echo $b_name; ?></td>
+                                                        <td><?php echo $b_address.','.$b_city; ?></td>
+                                                        <td><?php echo $ename; ?></td>
+                                                        <td><?php echo $total; ?></td>
+                                                        <td><?php echo $sts ?></td>
+                                                        </td>
 
-                                                </tr>
+                                                    </tr>
+                                                <?php }} ?>
 
 
                                             </tbody>
@@ -96,7 +115,7 @@ $eml=$_SESSION['eml'];
                 <div class="col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>VIEW COMPLETED DELIVERY</h2>
+                            <h2>VIEW CANCELED DELIVERY</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -117,11 +136,14 @@ $eml=$_SESSION['eml'];
                                         <table class="table table-striped jambo_table bulk_action">
                                             <thead>
                                             <tr class="headings">
+                                            <tr class="headings">
                                                 <th class="column-title">Product Name</th>
                                                 <th class="column-title">Buyer Name</th>
                                                 <th class="column-title">Buyer Loaction</th>
-                                                <th class="column-title">Qty</th>
-                                                <!--                                                <th class="column-title no-link last"><span class="nobr">Action</span>-->
+                                                <th class="column-title">Employee Name</th>
+                                                <th class="column-title">Total Amount</th>
+                                                <th class="column-title">Status</th>
+                                                <th class="column-title no-link last"><span class="nobr">Action</span>
                                                 </th>
                                                 <th class="bulk-actions" colspan="7">
                                                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -131,36 +153,44 @@ $eml=$_SESSION['eml'];
 
                                             <tbody>
                                             <?php
+                                            $sq1=mysqli_query($con,"select *from delivery inner join assigned_delivery on delivery.d_id=assigned_delivery.d_id where delivery.sts='canceled'");
+                                            while ($rw5 = mysqli_fetch_array($sq1)) {
+                                                $d_id = $rw5['d_id'];
+                                                $product_name = $rw5['product_name'];
+                                                $s_id = $rw5['s_id'];
+                                                $o_id = $rw5['o_id'];
+                                                $total = $rw5['total'];
+                                                $sts = $rw5['sts'];
+                                                $emp_id= $rw5['emp_id'];
+//                                            }
+                                                $sq2=mysqli_query($con,"select  * from employee where e_id='$emp_id'");
+                                                while ($rw6 = mysqli_fetch_array($sq2)) {
+                                                    $ename = $rw6['emp_name'];
 
-                                            $sq5 = mysqli_query($con, "select product_name,b_id,qty from product inner join cart on product.p_id=cart.p_id where s_id=8");
-                                            while ($rw5 = mysqli_fetch_array($sq5)) {
-                                                $pname = $rw5['product_name'];
-                                                $b_id = $rw5['b_id'];
-                                                $qty = $rw5['qty'];
-                                            }
-                                            $sq7 = mysqli_query($con, "select o_id,buy_name,city,sl_id,status from del_address inner join seller_orders on del_address.oi_id=seller_orders.oi_id where del_address.b_id='$b_id'");
-                                            while ($rw7 = mysqli_fetch_array($sq7)) {
-                                                $o_id = $rw7['o_id'];
-                                                $buy_name = $rw7['buy_name'];
-                                                $city = $rw7['city'];
-                                                $sl_id = $rw7['sl_id'];
-                                                $status = $rw7['status'];
-                                            }
-                                            if($status!='pending'){
+                                                }
+                                                $sq3=mysqli_query($con,"select  * from del_address where o_id='$o_id'");
+                                                while ($rw7 = mysqli_fetch_array($sq3)) {
+                                                    $b_name = $rw7['buy_name'];
+                                                    $b_mobile = $rw7['mobile'];
+                                                    $b_address = $rw7['address'];
+                                                    $b_city = $rw7['city'];
+                                                }
+                                                if($sts=='canceled')
+                                                {
 
-                                            ?>
-                                            <tr class="odd pointer">
-                                                <td><?php echo $pname ?></td>
-                                                <td><?php echo $buy_name ?></td>
-                                                <td><?php echo $city ?></td>
-                                                <td><?php echo $qty ?></td>
-                                                <td><?php echo "pending" ?></td>
-                                                <!--                                                    <td><a href="employee_disable.php?id=--><?php //echo $rw['emp_email'] ?><!--">Disable</a>-->
+                                                    ?>
+                                                    <tr class="odd pointer">
+                                                        <td><?php echo $product_name; ?></td>
+                                                        <td><?php echo $b_name; ?></td>
+                                                        <td><?php echo $b_address.','.$b_city; ?></td>
+                                                        <td><?php echo $ename; ?></td>
+                                                        <td><?php echo $total; ?></td>
+                                                        <td><?php echo $sts; ?></td>
+                                                        <td><a href="re_assign_delivery.php?id=<?php echo $d_id ?>">Re-Delivery</a>
+                                                        </td>
 
-                                                </td>
-                                                <?php }?>
-
-                                            </tr>
+                                                    </tr>
+                                                <?php }} ?>
 
                                             </tbody>
                                         </table>
