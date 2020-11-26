@@ -20,7 +20,7 @@ if (isTheseParametersAvailable(array('buyer_id'))) {
         //$temp['pid'] = $pid;
         $temp['price'] = $price;
         $temp['qty'] = $qty;
-        $temp['total'] = $tprice + $del_charge;
+        $temp['total'] = $price + $del_charge;
         $temp['delcharge'] = $del_charge;
         $temp['p_name'] = $pname;
         $temp['p_image'] = "http://192.168.42.146/plentiful/Seller/production/images/" . $image;

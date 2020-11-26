@@ -83,7 +83,7 @@ include "../../connection.php";
                                                         <td><?php echo $product_name; ?></td>
                                                         <td><?php echo $sname; ?></td>
                                                         <td><?php echo $smobile; ?></td>
-                                                        <td><?php echo $total; ?></td>
+                                                        <td><?php echo $total+40; ?></td>
                                                         <td><?php echo $supi; ?></td>
 
                                                         <td><a href=?id=<?php echo $pay_id ?>">Make Payment</a>

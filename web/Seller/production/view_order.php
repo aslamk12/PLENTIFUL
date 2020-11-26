@@ -141,6 +141,7 @@ while($rw=mysqli_fetch_array($sq))
                                                 <th class="column-title">Buyer Name</th>
                                                 <th class="column-title">Buyer Loaction</th>
                                                 <th class="column-title">Qty</th>
+                                                <th class="column-title">Total Amount</th>
                                                 <th class="column-title">Payment Status</th>
 <!--                                                <th class="column-title no-link last"><span class="nobr">Action</span>-->
                                                 </th>
@@ -153,11 +154,13 @@ while($rw=mysqli_fetch_array($sq))
                                             <tbody>
                                             <?php
 
-                                            $sq5 = mysqli_query($con, "select product_name,b_id,qty from product inner join cart on product.p_id=cart.p_id where s_id=8");
+                                            $sq5 = mysqli_query($con, "select product_name,b_id,qty,total from product inner join cart on product.p_id=cart.p_id where s_id='$s_id'");
                                             while ($rw5 = mysqli_fetch_array($sq5)) {
                                                 $pname = $rw5['product_name'];
                                                 $b_id = $rw5['b_id'];
                                                 $qty = $rw5['qty'];
+                                                $total = $rw5['total'];
+
 
                                             $sq7 = mysqli_query($con, "select o_id,buy_name,city,sl_id,status from del_address inner join seller_orders on del_address.oi_id=seller_orders.oi_id where del_address.b_id='$b_id'");
                                             while ($rw7 = mysqli_fetch_array($sq7)) {
@@ -175,6 +178,7 @@ while($rw=mysqli_fetch_array($sq))
                                                     <td><?php echo $buy_name ?></td>
                                                     <td><?php echo $city ?></td>
                                                     <td><?php echo $qty ?></td>
+                                                    <td><?php echo $total ?></td>
                                                     <td><?php echo "pending" ?></td>
 <!--                                                    <td><a href="employee_disable.php?id=--><?php //echo $rw['emp_email'] ?><!--">Disable</a>-->
 

@@ -184,7 +184,7 @@ if(isset($_POST['reg'])) {
         if($ins2) {
             if ($ins) {
                 echo "<script>alert('Registered successfully, waiting for approval')</script>";
-                echo "<script>window.location.href='seller_registration.php'</script>";
+                echo "<script>window.location.href='../../Admin/production/login.php'</script>";
             }
         }
 

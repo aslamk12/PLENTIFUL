@@ -22,8 +22,12 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+
 
 public class MyorderlistAdapter extends RecyclerView.Adapter<com.example.plentiful.MyorderlistAdapter.MyorderViewHolder> {
         private Context mCtx;
@@ -34,8 +38,10 @@ public class MyorderlistAdapter extends RecyclerView.Adapter<com.example.plentif
             this.mCtx = mCtx;
             this.myorderlists = myorderlists;
         }
+       String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-        @NonNull
+
+    @NonNull
         @Override
         public MyorderlistAdapter.MyorderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -58,6 +64,8 @@ public class MyorderlistAdapter extends RecyclerView.Adapter<com.example.plentif
             holder.tv_orderquantity.setText("Qty:"+(myorderlist.getQty()));
             holder.tv_delcharge.setText("Rs."+(myorderlist.getDelcharge()));
             holder.tv_total.setText("Rs."+myorderlist.getTotal());
+            holder.tv_est.setText("Estimated delivery date: "+ date);
+
 
         }
 
@@ -69,7 +77,7 @@ public class MyorderlistAdapter extends RecyclerView.Adapter<com.example.plentif
         class MyorderViewHolder extends RecyclerView.ViewHolder {
 
             private final Context context;
-            TextView tv_orderpname, tv_orderprice,tv_orderquantity,tv_delcharge,tv_total;
+            TextView tv_orderpname, tv_orderprice,tv_orderquantity,tv_delcharge,tv_total,tv_est;
             ImageView imageView;
 
             public MyorderViewHolder(View itemView) {
@@ -82,6 +90,8 @@ public class MyorderlistAdapter extends RecyclerView.Adapter<com.example.plentif
                 tv_orderquantity=itemView.findViewById(R.id.tv_order_quantity);
                 tv_delcharge=itemView.findViewById(R.id.tv_odelcharge);
                 tv_total=itemView.findViewById(R.id.tv_myordertotal);
+                tv_est =itemView.findViewById(R.id.tv_odeldate);
+
 
             }
         }

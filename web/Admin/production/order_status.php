@@ -87,7 +87,7 @@ $eml=$_SESSION['eml'];
                                                         <td><?php echo $b_name; ?></td>
                                                         <td><?php echo $b_address.','.$b_city; ?></td>
                                                         <td><?php echo $ename; ?></td>
-                                                        <td><?php echo $total; ?></td>
+                                                        <td><?php echo $total+40; ?></td>
                                                         <td><?php echo $sts ?></td>
                                                         </td>
 
@@ -184,7 +184,7 @@ $eml=$_SESSION['eml'];
                                                         <td><?php echo $b_name; ?></td>
                                                         <td><?php echo $b_address.','.$b_city; ?></td>
                                                         <td><?php echo $ename; ?></td>
-                                                        <td><?php echo $total; ?></td>
+                                                        <td><?php echo $total+40; ?></td>
                                                         <td><?php echo $sts; ?></td>
                                                         <td><a href="re_assign_delivery.php?id=<?php echo $d_id ?>">Re-Delivery</a>
                                                         </td>

@@ -90,7 +90,7 @@ include "../../connection.php";
                                                         <td><?php echo $b_name; ?></td>
                                                         <td><?php echo $b_address.','.$b_city; ?></td>
                                                         <td><?php echo $b_mobile; ?></td>
-                                                        <td><?php echo $total ?></td>
+                                                        <td><?php echo $total+40; ?></td>
 
                                                     </tr>
                                                 <?php }} ?>

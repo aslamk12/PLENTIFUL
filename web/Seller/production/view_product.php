@@ -77,7 +77,7 @@ while($rw=mysqli_fetch_array($sq))
                                                     <td><?php echo $rw1['time_for_production'] ?></td>
                                                     <td><?php echo $rw1['discription'] ?></td>
                                                     <td><a href="manage_product.php?id=<?php echo $rw1['p_id'] ?>">Edit</a> ||
-                                                        <a href="product_delete.php?id=<?php echo $rw['p_id'] ?>">Delete</a>
+                                                        <a href="product_delete.php?id=<?php echo $rw1['p_id'] ?>">Delete</a>
 
                                                     </td>
 

@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class LoginActivty extends AppCompatActivity {
     EditText email,password;
     Button login;
-    TextView forgot_pass,register;
+    TextView register;
 
 
     @Override
@@ -33,7 +33,6 @@ public class LoginActivty extends AppCompatActivity {
         email=(EditText)findViewById(R.id.usernameLogin);
         password=(EditText)findViewById(R.id.passwordLogin);
         login=(Button)findViewById(R.id.loginButton);
-        forgot_pass=(TextView)findViewById(R.id.forgotPassword);
         register=(TextView)findViewById(R.id.newUserRegistration);
 
 

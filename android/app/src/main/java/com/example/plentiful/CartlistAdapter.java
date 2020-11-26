@@ -44,7 +44,7 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.Cartli
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartlistAdapter.CartlistViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartlistAdapter.CartlistViewHolder holder, final int position) {
 
         Cartlist cartlist = cartlists.get(position);
         Glide.with(mCtx)
@@ -54,6 +54,14 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.Cartli
         holder.tv_cartpname.setText(cartlist.getP_name());
         holder.tv_price.setText("Rs."+(cartlist.getPrice()));
         holder.tv_quantity.setText("Qty:"+(cartlist.getQty()));
+        holder.cart_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                cartlists.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -67,7 +75,7 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.Cartli
         private final Context context;
         TextView tv_cartpname, tv_price,tv_quantity;
         ImageView imageView;
-        //Button cart_del;
+        Button cart_del;
 
         public CartlistViewHolder(View itemView) {
             super(itemView);
@@ -77,7 +85,7 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.Cartli
             tv_cartpname = itemView.findViewById(R.id.tv_cartproduct_name);
             tv_price = itemView.findViewById(R.id.tv_cartproduct_price);
             tv_quantity=itemView.findViewById(R.id.tv_quantity);
-//            cart_del = itemView.findViewById(R.id.btn_delcart);
+            cart_del = itemView.findViewById(R.id.btn_delcart);
 //            cart_del.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
