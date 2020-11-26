@@ -61,7 +61,7 @@ $eml=$_SESSION['eml'];
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-bug"></i> Settings <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="logout.php">Log Out</a></li>
+                                    <li><a href="../../Admin/production/logout.php">Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>
